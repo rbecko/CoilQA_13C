@@ -142,13 +142,11 @@ SNRprofile_cyl_RL = squeeze(mean(cat(3,SNRim_coil1_cyl_shft(RLidx,:),...
     SNRim_coil7_cyl(RLidx,:)),1)).';
 
 figure; colorder = get(gca,'colororder');
-subplot(121); 
-set(gca,'colororder',colorder([1,3:7],:),'NextPlot','ReplaceChildren'); 
+set(gca,'colororder',colorder([1,3:7],:)); subplot(121)
 plot(AP,SNRprofile_cyl_AP,'linewidth',1.5)
 axis([-inf inf 0 250]); ylabel 'SNR'; xlabel 'A-P [mm]'
 set(gca,'fontsize',imfontsize)
-subplot(122); 
-set(gca,'colororder',colorder([1,3:7],:),'NextPlot','ReplaceChildren'); 
+set(gca,'colororder',colorder([1,3:7],:)); subplot(122)
 plot(RL,SNRprofile_cyl_RL,'linewidth',1.5)
 axis([-inf inf 0 250]); ylabel 'SNR'; xlabel 'R-L [mm]'
 legend(profilelegend([1,3:7]),'location','northwest')
@@ -167,13 +165,11 @@ SNRprofile_sam_RL = squeeze(mean(cat(3,SNRim_coil1_sam_shft(RLidx,:),...
     SNRim_coil7_sam_shft(RLidx,:)),1)).';
 
 figure; 
-subplot(121); 
-set(gca,'colororder',colorder([1:4,6:7],:),'NextPlot','ReplaceChildren'); 
+subplot(121); set(gca,'colororder',colorder([1:4,6:7],:)); 
 plot(AP,SNRprofile_sam_AP,'linewidth',1.5)
 axis([-inf inf 0 250]); ylabel 'SNR'; xlabel 'A-P [mm]';
 set(gca,'fontsize',imfontsize)
-subplot(122); 
-set(gca,'colororder',colorder([1:4,6:7],:),'NextPlot','ReplaceChildren');
+subplot(122)
 plot(RL,SNRprofile_sam_RL,'linewidth',1.5)
 axis([-inf inf 0 250]); ylabel 'SNR'; xlabel 'R-L [mm]'
 legend(profilelegend([1:4,6:7]),'location','northwest')
