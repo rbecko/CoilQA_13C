@@ -3,4 +3,4 @@ QA acquisition and reconstruction protocol for 13C RF receive coil SNR evaluatio
 Besides SNR estimation the source code also provides estimates of noise correlations, G-factors, and T2* values. The QA protocol is based on imaging with a non-enriched 13C ethylene glycol phantom.
 The QA protocol follows the SNR estimation principles described by Kellman & Mcveigh.
 
-![alt text](https://github.com/rbecko/CoilQA_13C/master/Fig1_ISMRM2020.png)
+![alt text](https://github.com/rbecko/CoilQA_13C/blob/master/Fig1_ISMRM2020.png)
