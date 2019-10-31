@@ -8,3 +8,5 @@ The QA protocol follows the SNR estimation principles described by Kellman & Mcv
 
 ![QA protocol overview](https://github.com/rbecko/CoilQA_13C/blob/master/Fig1_ISMRM2020.png)
 > Overview of the QA protocol. “s” refers to the extracted signal estimate, “σ^2” to the scaled noise variance, “Ψ” to the scaled noise covariance matrix, and “b” to the estimated coil sensitivity profiles. The factor of √2  in the final SNR estimation equations is included to account for the SNR definition in terms of the real channel noise component.
+
+*Note that the source code was written in MATLAB R2016a (maci64)*
