@@ -3,7 +3,7 @@
 % sites", by Olin RB, Sánchez-Heredia JD, McLean MA, Laustsen C, Hansen AE,
 % Hanson LG and Ardenkjær-Larsen JH.
 
-% last edited: October 2019, Rie Beck Olin
+% last edited: November 2019, Rie Beck Olin
 
 clear; close all; clc
 
@@ -178,4 +178,5 @@ plot(RL,SNRprofile_sam_RL,'linewidth',1.5)
 axis([-inf inf 0 250]); ylabel 'SNR'; xlabel 'R-L [mm]'
 legend(profilelegend([1:4,6:7]),'location','northwest')
 set(gca,'fontsize',imfontsize)
+
 

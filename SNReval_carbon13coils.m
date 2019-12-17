@@ -57,6 +57,7 @@ if ~exist('R','var'),           R = []; end
 if isempty(R),                  R = 1; end
 if ~exist('rot','var'),         rot = false; end
 if ~exist('decorr','var'),      decorr = true; end
+dataext = [];
 
 %% read all data
 disp('loading data')
@@ -103,7 +104,7 @@ elseif strcmp(ext,'.7')
         end
     end
 elseif strcmp(ext,'.mat')
-    load(csi_path)
+    load(csi_path,'d','noise','sw_signal','te','txfrq','dataext')
     % check if all data were loaded
     if ~exist('d','var')||~exist('noise','var')||~exist('sw_signal',...
             'var')||~exist('te','var')||~exist('txfrq','var')...
@@ -124,7 +125,7 @@ ppm = -hz/txfrq;
 % time axis
 t = (0:size(d,1)-1)/sw_signal;
 % check if 2D or 3D spatial data
-if nz > 1; dim = 3; else dim = 2; end
+if nz > 1; dim = 3; else; dim = 2; end
 
 fprintf('TE = %.3g ms\n',te*1e3)
 
@@ -146,14 +147,14 @@ d_fil = sqrt(ns)*ifft(fftshift(spec_fil,1),[],1);
 
 % signal extraction in the time domain based on J-coupling and echo time
 jc = 1/142; % J-coupling time constant for EG
-if jc > te; temp_shift = jc-te; else temp_shift = 2*jc-te; end
+if jc > te; temp_shift = jc-te; else; temp_shift = 2*jc-te; end
 tmp = reshape(abs(d_fil),ns,nx*ny*nc); [tx,tidx] = max(max(tmp,[],1),[],2);
 [~,lc] = findpeaks(tmp(:,tidx),t,'NPeaks',10,'MinPeakHeight',tx/2,...
     'MinPeakDistance',3*temp_shift/4);
 
 jc = mean(diff(lc));
 fprintf('J-coupling = %.4g Hz\n',1/jc)
-if jc > te; temp_shift = jc-te; else temp_shift = 2*jc-te; end
+if jc > te; temp_shift = jc-te; else; temp_shift = 2*jc-te; end
 
 sig_idx = round(temp_shift*sw_signal+1);
 sig = squeeze(d_fil(sig_idx,:,:,:,:));
@@ -335,14 +336,12 @@ end
 %% extra: gmap estimation for multi-channel coils
 if smap == 1 && ~isempty(R) && R>1
     disp(['estimating g-factors for R=' num2str(R)])
-    mask = SNRim>10;
     if rot == true
         b1_pmfilt = imrotate(b1_pmfilt,90,'crop');
-        mask = imrotate(mask,90,'crop');
     end
     [~,gmap] = ismrm_calculate_sense_unmixing(R, b1_pmfilt);
     % mask gmap
-    gmap = gmap.*mask;
+    gmap = gmap.*(sos(b1_pmfilt)>4);
     gmap(gmap == 0) = nan;
     if rot == true
         gmap = imrotate(gmap,-90,'crop');
