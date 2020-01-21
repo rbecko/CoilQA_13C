@@ -92,7 +92,7 @@ csi_path = 'data/coil7_sam.mat'; noise_path = []; noiseBW = 0.845;
 SNRim_coil1_cyl_shft = cat(1,SNRim_coil1_cyl(2:end,:),zeros(1,ny));
 SNRim_coil1_cyl_shft = cat(2,SNRim_coil1_cyl_shft(:,2:end),zeros(nx,1));
 
-imfontsize = 16;
+imfontsize = 19;
 
 figure; 
 imagesc_row(cat(4,cat(3,SNRim_coil1_cyl_shft,SNRim_coil3_cyl,SNRim_coil4_cyl)...
@@ -150,7 +150,7 @@ subplot(122);
 set(gca,'colororder',colorder([1,3:7],:),'NextPlot','ReplaceChildren'); 
 plot(RL,SNRprofile_cyl_RL,'linewidth',1.5)
 axis([-inf inf 0 250]); ylabel 'SNR'; xlabel 'R-L [mm]'
-legend(profilelegend([1,3:7]),'location','northwest')
+legend(profilelegend([1,3:7]),'location','north')
 set(gca,'fontsize',imfontsize)
 
 % SNR profiles SAM phantom
@@ -186,19 +186,19 @@ hold on; text(4.5,9.5,sprintf('max=%.1f %%; min=%.1f %%; mean=%.1f %%',...
     max(vec(abs(ncorr_coil4_cyl)-eye(8)))*100,min(vec(abs(...
     ncorr_coil4_cyl)))*100,mean(vec(abs(ncorr_coil4_cyl)-eye(8)))*100),...
     'fontsize',imfontsize,'horizontalalignment','center','fontweight','bold')
-set(gca,'fontsize',imfontsize)
+set(gca,'fontsize',imfontsize); caxis([0 1])
 subplot(1,3,2); imagesc(abs(ncorr_coil5_cyl)); axis square; title 'Coil #5'
 hold on; text(8.5,18.5,sprintf('max=%.1f %%; min=%.1f %%; mean=%.1f %%',...
     max(vec(abs(ncorr_coil5_cyl)-eye(16)))*100,min(vec(abs(...
     ncorr_coil5_cyl)))*100,mean(vec(abs(ncorr_coil5_cyl)-eye(16)))*100),...
     'fontsize',imfontsize,'horizontalalignment','center','fontweight','bold')
-set(gca,'fontsize',imfontsize)
+set(gca,'fontsize',imfontsize); caxis([0 1])
 subplot(1,3,3); imagesc(abs(ncorr_coil6_cyl)); axis square; title 'Coil #6'
 hold on; text(7.5,16.25,sprintf('max=%.1f %%; min=%.1f %%; mean=%.1f %%',...
     max(vec(abs(ncorr_coil6_cyl)-eye(14)))*100,min(vec(abs(...
     ncorr_coil6_cyl)))*100,mean(vec(abs(ncorr_coil6_cyl)-eye(14)))*100),...
     'fontsize',imfontsize,'horizontalalignment','center','fontweight','bold')
-set(gca,'fontsize',imfontsize)
+set(gca,'fontsize',imfontsize); caxis([0 1])
 
 %% gmap simulations
 % for Cartesian undersampling factor R = 2 and R = 4
